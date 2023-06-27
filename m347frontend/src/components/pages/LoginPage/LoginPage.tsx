@@ -1,5 +1,5 @@
 import {Button, Card, CardContent, Grid, Link, TextField, Typography,} from '@mui/material';
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 
 import {Form, Formik} from 'formik';
 import {useNavigate} from 'react-router-dom';
@@ -24,7 +24,7 @@ const Login = () => {
             .then(() => {
                 console.log(values);
 
-                // @ts-ignore because the role of the user could be null but we catch that with the else here
+                // @ts-ignore because the role of the user could be null, but we catch that with the else here
                 if (context.user.roles.map((element) => element.name).includes(authorities.USER_MODIFY) || context.user.roles.map((element) => element.name).includes(authorities.USER_DELETE)) {
                     navigate('/authHomeAdmin');
                 } else {

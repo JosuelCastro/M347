@@ -1,8 +1,6 @@
-import React from 'react';
-
 import {ActiveUserContextProvider} from './Contexts/ActiveUserContext';
 import Router from './Router/Router';
-import {AppBar, createTheme, ThemeProvider, Toolbar, Typography} from "@mui/material";
+import {createTheme, ThemeProvider,} from "@mui/material";
 
 const theme = createTheme({
     typography: {
