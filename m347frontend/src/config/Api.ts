@@ -3,13 +3,17 @@ import axios, { AxiosInstance } from "axios";
 /**
  * isDev returns a boolean if the application is running in development-mode.
  */
-const isDev = (): boolean => !process.env.NODE_ENV || process.env.NODE_ENV === "development";
+const isDev = (): boolean => {
+    // Setze die Umgebungsvariable REACT_APP_NODE_ENV auf "development" im Entwicklungsmodus
+    const env = process.env.REACT_APP_NODE_ENV;
+    return !env || env === "development";
+};
 
 /**
  * Create an Axios instance for the api.
  */
 const createAPI = (): AxiosInstance => {
-  return axios.create({ baseURL: process.env.REACT_APP_BASEURL });
+    return axios.create({ baseURL: process.env.REACT_APP_BASEURL });
 };
 
 /**
@@ -22,47 +26,47 @@ const api: AxiosInstance = createAPI();
  * is stored inside the localStorage if a user is authenticated.
  */
 api.interceptors.request.use(
-  (request) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      request.headers.Authorization = token;
+    (request) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            request.headers.Authorization = token;
+        }
+        return request;
+    },
+    (error) => {
+        return Promise.reject(error);
     }
-    return request;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
 );
 
 /**
  * Log outgoing requests if the environment is in development-mode
  */
 api.interceptors.request.use((request) => {
-  if (isDev() && request.method) {
-    const info = `REQUEST ${request.method.toLocaleUpperCase()} ${request.url}`;
-    if (request.method.toLocaleLowerCase() === "get") {
-      console.debug(info);
-    } else {
-      console.debug(info, request.data);
+    if (isDev() && request.method) {
+        const info = `REQUEST ${request.method.toLocaleUpperCase()} ${request.url}`;
+        if (request.method.toLocaleLowerCase() === "get") {
+            console.debug(info);
+        } else {
+            console.debug(info, request.data);
+        }
     }
-  }
-  return request;
+    return request;
 }, Promise.reject);
 
 /**
  * Log incoming responses if the environment is in development-mode
  */
 api.interceptors.response.use(
-  (response) => {
-    if (isDev() && response.config && response.config.method) {
-      console.debug(
-        `RESPONSE ${response.config.method.toLocaleUpperCase()} ${response.config.url}`,
-        response.data
-      );
-    }
-    return response;
-  },
-  (error) => Promise.reject(error)
+    (response) => {
+        if (isDev() && response.config && response.config.method) {
+            console.debug(
+                `RESPONSE ${response.config.method.toLocaleUpperCase()} ${response.config.url}`,
+                response.data
+            );
+        }
+        return response;
+    },
+    (error) => Promise.reject(error)
 );
 
 export default api;

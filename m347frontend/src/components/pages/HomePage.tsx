@@ -1,5 +1,4 @@
 import {Box} from '@mui/system';
-import logo from '../../logo1.png';
 import {Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
@@ -20,12 +19,6 @@ export default function HomePage() {
             flexDirection={'column'}
         >
             <h1>Welcome to the Homepage</h1>
-            <img
-                src={logo}
-                style={{filter: 'invert(100%)'}}
-                className='App-logo'
-                alt='logo'
-            />
 
             <Button
                 className={"userButton"}

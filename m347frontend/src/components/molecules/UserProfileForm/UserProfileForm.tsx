@@ -17,6 +17,11 @@ interface UserProfileProps {
 const UserProfileForm = ({userProfile, submitActionHandler}: UserProfileProps) => {
     const navigate = useNavigate();
     const context = useContext(activeUserContext);
+
+    const viewProfile = (id: string) => {
+        navigate('../userprofileedit/' + id);
+    };
+
     const formik = useFormik({
         initialValues: {
             id: userProfile.id,
@@ -124,6 +129,7 @@ const UserProfileForm = ({userProfile, submitActionHandler}: UserProfileProps) =
                                             variant='contained'
                                             color='error'
                                             onClick={() => {
+                                                // @ts-ignore because the role of the user could be null but we catch that with the else here
                                                 if (context.user.roles.map((element) => element.name).includes(authorities.USER_MODIFY) || context.user.roles.map((element) => element.name).includes(authorities.USER_DELETE)) {
                                                     navigate('/authHomeAdmin');
                                                 } else {
@@ -332,6 +338,7 @@ const UserProfileForm = ({userProfile, submitActionHandler}: UserProfileProps) =
                                             variant='contained'
                                             color='primary'
                                             onClick={() => {
+                                                // @ts-ignore because the role of the user could be null but we catch that with the else here
                                                 if (context.user.roles.map((element) => element.name).includes(authorities.USER_MODIFY) || context.user.roles.map((element) => element.name).includes(authorities.USER_DELETE)) {
                                                     navigate('/authHomeAdmin');
                                                 } else {
