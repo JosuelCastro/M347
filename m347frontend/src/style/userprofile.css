@@ -1,0 +1,46 @@
+body {
+    background-color: #EBF1FA;
+}
+.userButtonText {
+    text-transform: capitalize !important;
+    text-decoration: none !important;
+}
+.userCard {
+    border-radius: 20px !important;
+    transition: 0.3s !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.blueButton {
+    background-color: #C9E6FC !important;
+    color: #081F20 !important;
+}
+.blueButton:hover {
+    background-color: #BFD9EE !important;
+    box-shadow: none !important;
+}
+.redButton {
+    background-color: #F9DBD7 !important;
+    color: #3B0605 !important;
+}
+.redButton:hover {
+    background-color: #e0c1bd !important;
+    box-shadow: none !important;
+}
+.greenButton {
+    background-color: #CCEDD2 !important;
+    color: #0E2004 !important;
+}
+.greenButton:hover {
+    background-color: #bbe0c0 !important;
+    box-shadow: none !important;
+}
+.secondaryButton {
+    background-color: #CCBBD2 !important;
+    color: #290c33 !important;
+}
+.secondaryButton:hover {
+    background-color: #b69fbe !important;
+    color: #290c33 !important;
+}
