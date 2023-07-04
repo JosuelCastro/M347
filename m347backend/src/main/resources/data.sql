@@ -39,6 +39,16 @@ CREATE TABLE IF NOT EXISTS  shopping_cart (
   FOREIGN KEY (item_id) REFERENCES item(id)
 );
 
+CREATE TABLE IF NOT EXISTS  user_profile (
+  id INT NOT NULL PRIMARY KEY,
+  profile_picture_url VARCHAR(255) NOT NULL,
+  age INT NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  birth_date DATE NOT NULL,
+  created_date DATE,
+  last_modified_date DATE,
+  FOREIGN KEY (user_id) REFERENCES "user"(id)
+);
 
 
 
