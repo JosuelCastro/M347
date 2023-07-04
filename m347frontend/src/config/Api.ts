@@ -3,11 +3,7 @@ import axios, { AxiosInstance } from "axios";
 /**
  * isDev returns a boolean if the application is running in development-mode.
  */
-const isDev = (): boolean => {
-  // Setze die Umgebungsvariable REACT_APP_NODE_ENV auf "development" im Entwicklungsmodus
-  const env = process.env.REACT_APP_NODE_ENV;
-  return !env || env === "development";
-};
+const isDev = (): boolean => !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
 /**
  * Create an Axios instance for the api.
@@ -60,9 +56,7 @@ api.interceptors.response.use(
   (response) => {
     if (isDev() && response.config && response.config.method) {
       console.debug(
-        `RESPONSE ${response.config.method.toLocaleUpperCase()} ${
-          response.config.url
-        }`,
+        `RESPONSE ${response.config.method.toLocaleUpperCase()} ${response.config.url}`,
         response.data
       );
     }

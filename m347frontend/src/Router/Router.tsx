@@ -19,7 +19,8 @@ import {
     styled,
     ThemeProvider,
     Toolbar,
-    Typography
+    Typography,
+    useTheme
 } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import React from "react";
@@ -121,6 +122,12 @@ const Router = () => {
                 }
             },
         }
+    });
+
+    const darkTheme = createTheme({
+        palette: {
+            mode: 'dark',
+        },
     });
 
     const [open, setOpen] = React.useState(false);
