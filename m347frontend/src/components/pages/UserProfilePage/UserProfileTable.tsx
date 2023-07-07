@@ -291,7 +291,7 @@ const UserProfileTable = () => {
                                                 <IconButton
                                                     className={"blueButton"}
                                                     size='large'
-                                                    onClick={() => handleEdit(userProfile.user!.id)}
+                                                    onClick={() => handleEdit(userProfile.id)}
                                                 >
                                                     <EditIcon/>
                                                 </IconButton>
