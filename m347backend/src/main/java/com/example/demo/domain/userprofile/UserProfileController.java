@@ -47,7 +47,7 @@ public class UserProfileController {
 
     //Get request for user profile by user id
     @GetMapping("/{id}") //Request url "localhost:8080/userprofile/{id}
-    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE') or @userPermissionEvaluator.isOwnProfile(authentication.principal.user,#id)") //Authorities USER_MODIFY/USER_DELETE needed or user id for own profile
+    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE')") //Authorities USER_MODIFY/USER_DELETE needed or user id for own profile
     @Operation(summary = "Find a user profile by user id")
     @ApiResponse(responseCode = "200", description = "Found user profile by id",content = {@Content(mediaType ="application/json")})
     public ResponseEntity<UserProfileDTO> getUserProfileById(@PathVariable UUID id){ //Required Param user id

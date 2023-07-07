@@ -43,12 +43,8 @@ public class UserProfileServiceImpl extends AbstractServiceImpl<UserProfile> imp
     @Override
     @Transactional
     public UserProfile createUserProfile(UserProfile userProfile) {
-        if (userProfileRepository.findUserProfileByUser_Id(userProfile.getUser().getId()).isEmpty()){ //check if user doesn't have a profile
             userProfile.setCreatedDate(new Date()); // Set created date on profile
             return userProfileRepository.save(userProfile); //save and return created user profile
-        } else { //if user already has profile
-            throw new NonUniqueResultException();  //throw NonUniqueResultException
-        }
     }
 
     @Override
