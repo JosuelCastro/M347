@@ -21,19 +21,13 @@ CREATE TABLE IF NOT EXISTS  role_authority (
   FOREIGN KEY (authority_id) REFERENCES authority(id)
 );
 
-CREATE TABLE IF NOT EXISTS  category (
-  id INT NOT NULL PRIMARY KEY,
-  "name" VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS item (
   id INT NOT NULL PRIMARY KEY,
+  pictureUrl VARCHAR(255) NOT NULL,
   user_id INT NOT NULL,
-  category_id INT NOT NULL,
   "name" VARCHAR(255) NOT NULL,
   description TEXT,
   FOREIGN KEY (user_id) REFERENCES "user"(id),
-  FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
 CREATE TABLE IF NOT EXISTS  shopping_cart (
