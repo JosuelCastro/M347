@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -31,7 +28,10 @@ public class Item extends AbstractEntity {
     @NotNull
     private String description;
 
-    @OneToMany
+    @NotNull
+    private Float price;
+
+    @ManyToOne
     private User user;
 
 }

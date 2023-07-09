@@ -7,5 +7,11 @@ import java.util.UUID;
 
 @Service
 public interface ShoppingCartService extends AbstractService<ShoppingCart> {
+
     ShoppingCart getShoppingCartById(UUID id);
+
+    void addItemToCart(UUID cartId, UUID itemId, int quantity);
+
+    void removeItemFromCart(UUID cartId, UUID cartItemId);
+
 }

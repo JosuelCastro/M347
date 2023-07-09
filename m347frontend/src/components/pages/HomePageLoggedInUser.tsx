@@ -12,11 +12,11 @@ export default function HomePageLoggedInUser() {
     const navigate = useNavigate();
 
     const handleAdd = () => {
-        navigate('../userprofileedit/');
+        navigate('../itemedit/');
     };
 
     const handleEdit = (id: string) => {
-        navigate('../userprofileedit/' + id);
+        navigate('../itemedit/' + id);
     };
 
     return (
@@ -44,7 +44,7 @@ export default function HomePageLoggedInUser() {
                                     fontWeight={"bold"}
                                     className={"userButtonText"}
                                 >
-                                    Create a Profile
+                                    Create an Item
                                 </Typography>
                             </Button>
 

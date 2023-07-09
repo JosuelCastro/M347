@@ -12,11 +12,11 @@ export default function HomePageLoggedInAdmin() {
     const navigate = useNavigate();
 
     const handleAdd = () => {
-        navigate('/userprofileedit/');
+        navigate('/itemedit/');
     };
 
     const handleEdit = (id: string) => {
-        navigate('../userprofileedit/' + id);
+        navigate('../itemedit/' + id);
     };
 
     return (
@@ -43,7 +43,7 @@ export default function HomePageLoggedInAdmin() {
                                     fontWeight={"bold"}
                                     className={"userButtonText"}
                                 >
-                                    Create a Profile
+                                    Add an Item
                                 </Typography>
                             </Button>
 
@@ -59,7 +59,7 @@ export default function HomePageLoggedInAdmin() {
                                     className={"userButtonText"}
                                     onClick={() => handleEdit(context.user!.id)}
                                 >
-                                    Edit Profile
+                                    Edit Item
                                 </Typography>
                             </Button>
 
@@ -68,13 +68,13 @@ export default function HomePageLoggedInAdmin() {
                                 color='secondary'
                                 variant='contained'
                             >
-                                <NavLink to={"/userprofile"} className={"userButtonText"}>
+                                <NavLink to={"/item"} className={"userButtonText"}>
                                     <Typography
                                         variant="body2"
                                         fontWeight={"bold"}
                                         className={"userButtonText"}
                                     >
-                                        See all Profiles
+                                        See all Items
                                     </Typography>
                                 </NavLink>
                             </Button>
