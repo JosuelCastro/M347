@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Item } from "../../../types/models/Item.model";
 import ItemService from "../../../Services/ItemService";
 import { NavLink, useNavigate } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Box,
   createTheme,
@@ -22,7 +23,6 @@ import "../../../style/userprofile.css";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -88,12 +88,6 @@ const theme = createTheme({
   },
 });
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
 const ItemTable = () => {
   const [sortBy, setSortBy] = useState<string>("name");
   const navigate = useNavigate();
@@ -123,8 +117,8 @@ const ItemTable = () => {
   }, [currentPage, sortBy, asc]);
 
   const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
+      event: React.ChangeEvent<unknown>,
+      value: number
   ) => {
     setCurrentPage(value - 1);
   };
@@ -145,223 +139,224 @@ const ItemTable = () => {
     });
   };
 
-  const handleAddToCart = () => {
-    alert("Item added to your shopping cart");
-  };
-
   function remove(removeItems: Item[], itemId: string) {
     const result = removeItems.filter((item) => item.id !== itemId);
     setItems(result);
   }
 
+  const handleAddToCart = () => {
+    alert("Item added to your shopping cart");
+  };
+
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Grid container>
-          <Grid md={10} mdOffset={1}>
-            <Grid container columns={{ xs: 6, sm: 9, md: 12 }}>
-              <Grid xs={3} sm={4.5} md={6} p={1}>
-                <Pagination
-                  count={1}
-                  color="primary"
-                  size="large"
-                  onChange={handlePageChange}
-                />
-                <Button
-                  className={"userButton greenButton"}
-                  variant="contained"
-                  onClick={handleAdd}
-                  startIcon={<AddIcon />}
-                  size={"large"}
-                  sx={{
-                    mx: 0.5,
-                    mt: 1,
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    fontWeight={"bold"}
-                    className={"userButtonText"}
+      <>
+        <ThemeProvider theme={theme}>
+          <Grid container>
+            <Grid md={10} mdOffset={1}>
+              <Grid container columns={{ xs: 6, sm: 9, md: 12 }}>
+                <Grid xs={3} sm={4.5} md={6} p={1}>
+                  <Pagination
+                      count={1}
+                      color="primary"
+                      size="large"
+                      onChange={handlePageChange}
+                  />
+                  <Button
+                      className={"userButton greenButton"}
+                      variant="contained"
+                      onClick={handleAdd}
+                      startIcon={<AddIcon />}
+                      size={"large"}
+                      sx={{
+                        mx: 0.5,
+                        mt: 1,
+                      }}
                   >
-                    Add
-                  </Typography>
-                </Button>
-                <Button
-                  className={"redButton"}
-                  variant="contained"
-                  sx={{
-                    mx: 0.5,
-                    mt: 1,
-                  }}
-                  size={"large"}
-                  startIcon={<KeyboardReturnIcon />}
-                >
-                  <NavLink to={"/authHomeAdmin"} className={"userButtonText"}>
                     <Typography
-                      variant="body2"
-                      fontWeight={"bold"}
-                      className={"userButtonText"}
+                        variant="body2"
+                        fontWeight={"bold"}
+                        className={"userButtonText"}
                     >
-                      Back
+                      Add
                     </Typography>
-                  </NavLink>
-                </Button>
-              </Grid>
-              <Grid
-                xs={3}
-                sm={4.5}
-                md={6}
-                p={1}
-                display={"flex"}
-                justifyContent={"flex-end"}
-                alignItems={"center"}
-              >
-                <Typography sx={{ fontWeight: 600 }} className="typography">
-                  Sort by
-                </Typography>
-                <Select
-                  sx={{ ml: 1 }}
-                  name={"sortBy"}
-                  value={sortBy}
-                  label={"Sort By"}
-                  onChange={(e) => setSortBy(e.target.value)}
-                >
-                  {sortByOptions.map((opt) => (
-                    <MenuItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <IconButton onClick={handleOrderToggle}>
-                  {asc ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
-                </IconButton>
-              </Grid>
-              {items.map((item) => (
-                <Grid xs={12} md={6} lg={3} p={1} key={item.id}>
-                  <Card className={"userCard"} sx={{ boxShadow: "none" }}>
-                    <CardContent sx={{ height: "100%", padding: 3 }}>
-                      <img
-                        style={{
-                          verticalAlign: "middle",
-                          width: "50px",
-                          height: "50px",
-                          borderRadius: "10px",
-                          objectFit: "cover",
-                        }}
-                        src={item.pictureURL}
-                        alt="Picture"
-                      />
+                  </Button>
+                  <Button
+                      className={"redButton"}
+                      variant="contained"
+                      sx={{
+                        mx: 0.5,
+                        mt: 1,
+                      }}
+                      size={"large"}
+                      startIcon={<KeyboardReturnIcon />}
+                  >
+                    <NavLink to={"/profile"} className={"userButtonText"}>
                       <Typography
-                        gutterBottom
-                        variant="h5"
-                        fontWeight={"bold"}
-                        component="div"
-                        sx={{ display: "inline-block", ml: 1 }}
-                      >
-                        {item.name}
-                      </Typography>
-                      <Typography
-                        gutterBottom
-                        variant="body2"
-                        fontWeight={"bold"}
-                        component="div"
-                      >
-                        Description:
-                      </Typography>
-                      <Paper
-                        elevation={1}
-                        sx={{ pl: "5px", pt: "5px", pb: "1px" }}
-                      >
-                        <Typography
-                          gutterBottom
-                          variant="body1"
+                          variant="body2"
                           fontWeight={"bold"}
-                          component="div"
-                        >
-                          {item.description}
-                        </Typography>
-                      </Paper>
-                      <Typography
-                        gutterBottom
-                        variant="body2"
-                        fontWeight={"bold"}
-                        component="div"
+                          className={"userButtonText"}
                       >
-                        Price:
+                        Back
                       </Typography>
-                      <Paper
-                        elevation={1}
-                        sx={{ pl: "5px", pt: "5px", pb: "1px" }}
-                      >
-                        <Typography
-                          gutterBottom
-                          variant="body1"
-                          fontWeight={"bold"}
-                          component="div"
-                        >
-                          {item.price}
-                        </Typography>
-                      </Paper>
-                      <Typography
-                        gutterBottom
-                        variant="body2"
-                        fontWeight={"bold"}
-                        component="div"
-                      >
-                        Seller:
-                      </Typography>
-                      <Paper
-                        elevation={1}
-                        sx={{ pl: "5px", pt: "5px", pb: "1px" }}
-                      >
-                        <Typography
-                          gutterBottom
-                          variant="body1"
-                          fontWeight={"bold"}
-                          component="div"
-                        >
-                          {item.user?.firstName} {item.user?.lastName}
-                        </Typography>
-                      </Paper>
-                      <Box mt={1}>
-                        <IconButton
-                          className={"blueButton"}
-                          size="large"
-                          onClick={() => handleEdit(item.id)}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton
-                          className={"redButton"}
-                          size="large"
-                          onClick={() => handleDelete(item.id)}
-                          sx={{
-                            ml: 1,
-                          }}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                        <IconButton
-                          className={"greenButton"}
-                          size="large"
-                          onClick={() => handleAddToCart()}
-                          sx={{
-                            ml: 1,
-                          }}
-                        >
-                          <ShoppingCartIcon />
-                        </IconButton>
-                      </Box>
-                    </CardContent>
-                  </Card>
+                    </NavLink>
+                  </Button>
                 </Grid>
-              ))}
+                <Grid
+                    xs={3}
+                    sm={4.5}
+                    md={6}
+                    p={1}
+                    display={"flex"}
+                    justifyContent={"flex-end"}
+                    alignItems={"center"}
+                >
+                  <Typography sx={{ fontWeight: 600 }} className="typography">
+                    Sort by
+                  </Typography>
+                  <Select
+                      sx={{ ml: 1 }}
+                      name={"sortBy"}
+                      value={sortBy}
+                      label={"Sort By"}
+                      onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    {sortByOptions.map((opt) => (
+                        <MenuItem key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </MenuItem>
+                    ))}
+                  </Select>
+                  <IconButton onClick={handleOrderToggle}>
+                    {asc ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
+                  </IconButton>
+                </Grid>
+                {items.map((item) => (
+                    <Grid xs={12} md={6} lg={3} p={1} key={item.id}>
+                      <Card className={"userCard"} sx={{ boxShadow: "none" }}>
+                        <CardContent sx={{ height: "100%", padding: 3 }}>
+                          <Typography
+                              gutterBottom
+                              variant="h5"
+                              fontWeight={"bold"}
+                              component="div"
+                              sx={{ display: "inline-block" }}
+                          >
+                            {item.name}
+                          </Typography>
+                          <br />
+                          <img
+                              style={{
+                                verticalAlign: "middle",
+                                width: "100%",
+                                height: "auto",
+                                borderRadius: "10px",
+                                objectFit: "cover",
+                              }}
+                              src={item.pictureURL}
+                              alt="Picture"
+                          />
+                          <Typography
+                              gutterBottom
+                              variant="body2"
+                              fontWeight={"bold"}
+                              component="div"
+                          >
+                            Description:
+                          </Typography>
+                          <Paper
+                              elevation={1}
+                              sx={{ pl: "5px", pt: "5px", pb: "1px" }}
+                          >
+                            <Typography
+                                gutterBottom
+                                variant="body1"
+                                fontWeight={"bold"}
+                                component="div"
+                            >
+                              {item.description}
+                            </Typography>
+                          </Paper>
+                          <Typography
+                              gutterBottom
+                              variant="body2"
+                              fontWeight={"bold"}
+                              component="div"
+                          >
+                            Price:
+                          </Typography>
+                          <Paper
+                              elevation={1}
+                              sx={{ pl: "5px", pt: "5px", pb: "1px" }}
+                          >
+                            <Typography
+                                gutterBottom
+                                variant="body1"
+                                fontWeight={"bold"}
+                                component="div"
+                            >
+                              {item.price}.-
+                            </Typography>
+                          </Paper>
+                          <Typography
+                              gutterBottom
+                              variant="body2"
+                              fontWeight={"bold"}
+                              component="div"
+                          >
+                            Seller:
+                          </Typography>
+                          <Paper
+                              elevation={1}
+                              sx={{ pl: "5px", pt: "5px", pb: "1px" }}
+                          >
+                            <Typography
+                                gutterBottom
+                                variant="body1"
+                                fontWeight={"bold"}
+                                component="div"
+                            >
+                              {item.user?.firstName} {item.user?.lastName}
+                            </Typography>
+                          </Paper>
+                          <Box mt={1}>
+                            <IconButton
+                                className={"blueButton"}
+                                size="large"
+                                onClick={() => handleEdit(item.id)}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                            <IconButton
+                                className={"redButton"}
+                                size="large"
+                                onClick={() => handleDelete(item.id)}
+                                sx={{
+                                  ml: 1,
+                                }}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                            <IconButton
+                                className={"greenButton"}
+                                size="large"
+                                onClick={() => handleAddToCart()}
+                                sx={{
+                                  ml: 1,
+                                }}
+                            >
+                              <ShoppingCartIcon />
+                            </IconButton>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                ))}
+              </Grid>
             </Grid>
+            <Grid md={1} />
           </Grid>
-          <Grid md={1} />
-        </Grid>
-      </ThemeProvider>
-    </>
+        </ThemeProvider>
+      </>
   );
 };
 export default ItemTable;
