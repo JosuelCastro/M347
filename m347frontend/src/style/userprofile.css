@@ -28,6 +28,15 @@ body {
     background-color: #e0c1bd !important;
     box-shadow: none !important;
 }
+
+.greenButton {
+    background-color: #e8f9d7 !important;
+    color: #3B0605 !important;
+}
+.greenButton:hover {
+    background-color: #cce0bd !important;
+    box-shadow: none !important;
+}
 .greenButton {
     background-color: #CCEDD2 !important;
     color: #0E2004 !important;

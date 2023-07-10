@@ -15,7 +15,7 @@ public class UserPermissionEvaluator {
     return true;
   }
 
-  public boolean isOwnProfile(User principal, UUID id) {
+  public boolean isOwnItem(User principal, UUID id) {
     return principal.getId().equals(id);
   }
 

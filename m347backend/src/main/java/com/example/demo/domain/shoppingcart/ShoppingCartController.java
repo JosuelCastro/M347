@@ -1,6 +1,9 @@
 package com.example.demo.domain.shoppingcart;
 
+import com.example.demo.domain.item.Item;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -19,6 +22,12 @@ public class ShoppingCartController {
     public ResponseEntity<ShoppingCart> getShoppingCartById(@PathVariable UUID id) {
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartById(id);
         return ResponseEntity.ok(shoppingCart);
+    }
+
+    @PostMapping("")
+    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE')")
+    public ResponseEntity<ShoppingCart> createShoppingCart(@RequestBody ShoppingCart shoppingCart) {
+        return new ResponseEntity<>(shoppingCartService.save(shoppingCart), HttpStatus.CREATED);
     }
 
     @PostMapping("/{cartId}/item")

@@ -34,19 +34,19 @@ public class ItemController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE')")
+    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE') or @userPermissionEvaluator.isOwnItem(authentication.principal.user,#item.user.id)")
     public ResponseEntity<Item> createItem(@RequestBody Item item) {
         return new ResponseEntity<>(itemService.save(item), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE')")
+    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE') or @userPermissionEvaluator.isOwnItem(authentication.principal.user,#item.user.id)")
     public ResponseEntity<Item> updateItem(@PathVariable UUID id, @RequestBody Item item) {
         return new ResponseEntity<>(itemService.updateById(id, item), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE')")
+    @PreAuthorize("hasAuthority('USER_MODIFY') or hasAuthority('USER_DELETE') or @userPermissionEvaluator.isOwnItem(authentication.principal.user,#item.user.id)")
     public ResponseEntity<Void> deleteItem(@PathVariable UUID id) {
         itemService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -22,6 +22,7 @@ import "../../../style/userprofile.css";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -142,6 +143,10 @@ const ItemTable = () => {
     ItemService.deleteItem(id).then(() => {
       remove(items, id);
     });
+  };
+
+  const handleAddToCart = () => {
+    alert("Item added to your shopping cart");
   };
 
   function remove(removeItems: Item[], itemId: string) {
@@ -335,6 +340,16 @@ const ItemTable = () => {
                           }}
                         >
                           <DeleteIcon />
+                        </IconButton>
+                        <IconButton
+                          className={"greenButton"}
+                          size="large"
+                          onClick={() => handleAddToCart()}
+                          sx={{
+                            ml: 1,
+                          }}
+                        >
+                          <ShoppingCartIcon />
                         </IconButton>
                       </Box>
                     </CardContent>

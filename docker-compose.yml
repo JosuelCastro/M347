@@ -9,6 +9,8 @@ services:
     environment:
       POSTGRES_PASSWORD: 'postgres'
       POSTGRES_DB: 'postgres'
+    volumes:
+      - db-data:/var/lib/postgresql/data
   backend:
     build: /m347backend/.
     container_name: backend  
@@ -24,4 +26,6 @@ services:
     container_name: frontend
     ports:
       - "3000:3000"
+volumes:
+  db-data:
   
