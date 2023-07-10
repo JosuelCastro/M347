@@ -4,9 +4,10 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {Card, CardContent, Grid, Typography} from "@mui/material";
 import React from "react";
 import ActiveUserContext from "../../Contexts/ActiveUserContext";
+import authorities from "../../config/Authorities";
 
 //The home page for a logged-in admin
-export default function HomePageLoggedInAdmin() {
+export default function ProfilePage() {
 
     const context = React.useContext(ActiveUserContext);
     const navigate = useNavigate();
@@ -31,44 +32,30 @@ export default function HomePageLoggedInAdmin() {
                 <Grid item md={4} lg={4} p={2}>
                     <Card className={"userCard"} sx={{boxShadow: "none"}}>
                         <CardContent>
-                            <h1>Welcome to the Admin Homepage</h1>
-                            <Button
-                                className={"userButton"}
-                                color='success'
-                                variant='contained'
-                                onClick={handleAdd}
-                            >
-                                <Typography
-                                    variant="body2"
-                                    fontWeight={"bold"}
-                                    className={"userButtonText"}
-                                >
-                                    Add an Item
-                                </Typography>
-                            </Button>
-
-                            <Button
-                                className={"userButton"}
-                                color='info'
-                                variant='contained'
-                                sx={{my: 1}}
-                            >
-                                <Typography
-                                    variant="body2"
-                                    fontWeight={"bold"}
-                                    className={"userButtonText"}
-                                    onClick={() => handleEdit(context.user!.id)}
-                                >
-                                    Edit Item
-                                </Typography>
-                            </Button>
-
+                            <h1>Welcome, {context.user!.firstName} {context.user!.lastName}</h1>
                             <Button
                                 className={"userButton"}
                                 color='secondary'
                                 variant='contained'
+                                onClick={() => {
+                                    if (
+                                        // @ts-ignore because the role of the user could be null but we catch that with the else here
+                                        context.user?.roles
+                                            .map((element) => element.name)
+                                            // @ts-ignore
+                                            .includes(authorities.USER_DELETE) ||
+                                        // @ts-ignore because the role of the user could be null but we catch that with the else here
+                                        context.user?.roles
+                                            .map((element) => element.name)
+                                            // @ts-ignore
+                                            .includes(authorities.USER_MODIFY)
+                                    ) {
+                                        navigate("/item");
+                                    } else {
+                                        navigate("/itemuser");
+                                    }
+                                }}
                             >
-                                <NavLink to={"/item"} className={"userButtonText"}>
                                     <Typography
                                         variant="body2"
                                         fontWeight={"bold"}
@@ -76,7 +63,6 @@ export default function HomePageLoggedInAdmin() {
                                     >
                                         See all Items
                                     </Typography>
-                                </NavLink>
                             </Button>
 
                             <Button
@@ -94,13 +80,6 @@ export default function HomePageLoggedInAdmin() {
                                     Logout
                                 </Typography>
                             </Button>
-                            <Typography
-                                variant="body2"
-                                fontWeight={"bold"}
-                                sx={{mt: 2}}
-                            >
-                                Logged in as: {context.user?.firstName} {context.user?.lastName}
-                            </Typography>
                         </CardContent>
                     </Card>
                 </Grid>

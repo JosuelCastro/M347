@@ -26,9 +26,9 @@ const Login = () => {
 
                 // @ts-ignore because the role of the user could be null but we catch that with the else here
                 if (context.user.roles.map((element) => element.name).includes(authorities.USER_MODIFY) || context.user.roles.map((element) => element.name).includes(authorities.USER_DELETE)) {
-                    navigate('/authHomeAdmin');
+                    navigate('/profile');
                 } else {
-                    navigate('/authHomeUser');
+                    navigate('/profile');
                 }
             })
             .catch((error) => {
@@ -125,13 +125,6 @@ const Login = () => {
                                 </Form>
                             )}
                         </Formik>
-                        <Typography>
-                            <Link href='#'>Forgot password ?</Link>
-                        </Typography>
-                        <Typography>
-                            {' '}
-                            Do you have an account ?<Link href='#'>Sign Up</Link>
-                        </Typography>
                     </CardContent>
                 </Card>
             </Grid>

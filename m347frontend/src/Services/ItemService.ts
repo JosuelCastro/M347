@@ -37,6 +37,9 @@ const ItemService = {
   deleteItem: (id: string) => {
     return api.delete(`/item/${id}`);
   },
+  getItemsByUserId: (userId: string): Promise<AxiosResponse<Item[]>> => {
+    return api.get<Item[]>(`/item/user/${userId}`);
+  },
 };
 
 export default ItemService;

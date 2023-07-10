@@ -149,9 +149,9 @@ const ItemForm = ({ Item, submitActionHandler }: ItemProps) => {
                           // @ts-ignore
                           .includes(authorities.USER_MODIFY)
                       ) {
-                        navigate("/authHomeAdmin");
+                        navigate("/profile");
                       } else {
-                        navigate("/authHomeUser");
+                        navigate("/profile");
                       }
                     }}
                   >

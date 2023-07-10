@@ -20,13 +20,7 @@ export default function HomePage() {
             justifyContent='center'
             flexDirection={'column'}
         >
-            <h1>Welcome to the Homepage</h1>
-            <img
-                src={logo}
-                style={{filter: 'invert(100%)'}}
-                className='App-logo'
-                alt='logo'
-            />
+            <h1>Welcome to Senior Tech 2</h1>
 
             <Button
                 className={"userButton"}
