@@ -111,20 +111,10 @@ const ItemTable = () => {
   };
 
   useEffect(() => {
-    const fetchUserItems = async () => {
-      try {
-        if (user) {
-          const response = await ItemService.getAllItems(100, 1, "name", true);
-          const userItems = response.data.filter(item => item.user?.id === user.id);
-          setItems(userItems);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUserItems();
-  }, [user]);
+    ItemService.getAllItems(pageSize, currentPage, sortBy, asc).then((data) => {
+      setItems(data.data);
+    });
+  }, [currentPage, sortBy, asc]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -195,8 +185,8 @@ const ItemTable = () => {
                   }}
                   size={"large"}
                   startIcon={<KeyboardReturnIcon />}
+                  onClick={() => navigate("/profile")}
                 >
-                  <NavLink to={"/profile"} className={"userButtonText"}>
                     <Typography
                       variant="body2"
                       fontWeight={"bold"}
@@ -204,7 +194,6 @@ const ItemTable = () => {
                     >
                       Back
                     </Typography>
-                  </NavLink>
                 </Button>
               </Grid>
               <Grid

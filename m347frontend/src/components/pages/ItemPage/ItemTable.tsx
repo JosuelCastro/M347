@@ -189,16 +189,15 @@ const ItemTable = () => {
                       }}
                       size={"large"}
                       startIcon={<KeyboardReturnIcon />}
+                      onClick={() => navigate("/profile")}
                   >
-                    <NavLink to={"/profile"} className={"userButtonText"}>
-                      <Typography
-                          variant="body2"
-                          fontWeight={"bold"}
-                          className={"userButtonText"}
-                      >
-                        Back
-                      </Typography>
-                    </NavLink>
+                    <Typography
+                        variant="body2"
+                        fontWeight={"bold"}
+                        className={"userButtonText"}
+                    >
+                      Back
+                    </Typography>
                   </Button>
                 </Grid>
                 <Grid
