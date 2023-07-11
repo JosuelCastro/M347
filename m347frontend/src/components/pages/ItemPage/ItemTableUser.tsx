@@ -25,6 +25,7 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ActiveUserContext from "../../../Contexts/ActiveUserContext";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const theme = createTheme({
   typography: {
@@ -143,6 +144,11 @@ const ItemTable = () => {
     const result = removeItems.filter((item) => item.id !== itemId);
     setItems(result);
   }
+
+  const handleAddToCart = () => {
+    alert("Item added to your shopping cart");
+  };
+
 
   return (
     <>
@@ -313,6 +319,15 @@ const ItemTable = () => {
                           {item.user?.firstName} {item.user?.lastName}
                         </Typography>
                       </Paper>
+                      <Box mt={1}>
+                        <IconButton
+                            className={"greenButton"}
+                            size="large"
+                            onClick={() => handleAddToCart()}
+                        >
+                          <ShoppingCartIcon />
+                        </IconButton>
+                      </Box>
                     </CardContent>
                   </Card>
                 </Grid>
