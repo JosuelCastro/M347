@@ -12,9 +12,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
   backend:
-    build: /m347backend/.
+    image: orcbat/backend:v1.0
     container_name: backend  
-    env_file: /m347backend/.env
+    env_file: .env
     depends_on:
       - db
     ports:
@@ -22,7 +22,7 @@ services:
     volumes:
       - ./src:/app/src
   frontend:
-    build: /m347frontend/.
+    image: orcbat/frontend:v1.0
     container_name: frontend
     ports:
       - "3000:3000"
